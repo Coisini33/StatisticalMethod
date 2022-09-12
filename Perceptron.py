@@ -12,6 +12,7 @@ b = b + eps * yi
 '''
 
 import numpy as np
+import matplotlib.pyplot as plt
 def Perceptron(w, b, x, y, eps):
     checkOK = True
     while checkOK:
@@ -39,6 +40,23 @@ def Perceptron(w, b, x, y, eps):
 
 
     print(w, b)
+
+    zp = []
+    zn = []
+    for i in range(0, x.shape[1]):
+        if y[i] == 1:
+            for j in range(0, len(x)):
+                zp.append(x[j, i])
+        else:
+            for j in range(0, len(x)):
+                zn.append(x[j, i])
+    plt.scatter(zp[0: len(zp): len(x)], zp[1: len(zp): len(x)])
+    plt.scatter(zn[0: len(zn): len(x)], zn[1: len(zn): len(x)])
+
+    x1 = np.arange(0, 5, 0.1)
+    x2 = np.array(-(w[0, 0] * x1 + b)/w[0, 1]).squeeze()
+    plt.plot(x1, x2)
+    plt.show()
 
 def runPerceptron():
     x1 = np.matrix([[3, 3], [4, 3], [1, 1]])
